@@ -1,24 +1,20 @@
 # README
+This is a simple blog API project written in Ruby on Rails. The main objective of this is to serve as a study and showcase for Ruby on Rails features.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Ruby version
+3.1.2
 
-Things you may want to cover:
+### Database creation
+`bundle exec rake db:create`
 
-* Ruby version
+### Database
+PostgreSQL
 
-* System dependencies
+### How to run the test suite
+`bundle exec rspec` 
 
-* Configuration
+### Start server
+`bundle exec rails s`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Start console
+`bundle exec rails c`
