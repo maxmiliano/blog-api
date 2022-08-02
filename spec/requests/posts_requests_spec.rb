@@ -1,11 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
+
+  let(:user) { create(:user) }
+
+
   describe 'GET /index' do
     let!(:posts) { Array.new(10) { FactoryBot.create(:post) } }
     let(:action) { get '/api/v1/posts' }
 
     it 'returns all posts' do
+
+      sign_in user
+
       action
 
       expect(response).to have_http_status(:success)
@@ -29,6 +36,7 @@ RSpec.describe 'Posts', type: :request do
       }
 
       it 'returns created post data' do
+        sign_in user
         action
 
         post_data = JSON.parse(response.body)
@@ -52,6 +60,7 @@ RSpec.describe 'Posts', type: :request do
       }
 
       it 'returns an unprocessable_entity status' do
+        sign_in user
         action
 
         expect(response).to have_http_status(:unprocessable_entity)
@@ -70,6 +79,7 @@ RSpec.describe 'Posts', type: :request do
       }
 
       it 'returns an unprocessable_entity status' do
+        sign_in user
         action
 
         expect(response).to have_http_status(:unprocessable_entity)
@@ -86,6 +96,7 @@ RSpec.describe 'Posts', type: :request do
     }
 
     it 'returns status code 204' do
+      sign_in user
       action
 
       expect(response).to have_http_status(204)
