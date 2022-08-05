@@ -1,36 +1,39 @@
-class Api::V1::PostsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :authenticate_user!
+module Api
+  module V1
+    # Controller class to manage Posts
+    class PostsController < ApplicationController
+      before_action :authenticate_user!
 
-  def index
-    @posts = Post.all
-    render json: @posts
-  end
+      def index
+        @posts = Post.all
+        render json: @posts
+      end
 
-  def create
-    @post = Post.create(post_params)
+      def create
+        @post = Post.create(post_params)
 
-    if @post.valid?
-      render json: @post, status: :created
-    else
-      render json: @post.errors, status: :unprocessable_entity
+        if @post.valid?
+          render json: @post, status: :created
+        else
+          render json: @post.errors, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        @post = Post.find(params[:id])
+        @post.destroy
+        render status: :no_content
+      end
+
+      private
+
+      def post_params
+        params
+          .require(:post)
+          .permit(:title, :content)
+      end
     end
   end
-
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    render status: :no_content
-  end
-
-
-
-  private
-
-  def post_params
-    params
-      .require(:post)
-      .permit(:title, :content)
-  end
-
 end

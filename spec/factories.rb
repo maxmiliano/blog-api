@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faker'
 
 FactoryBot.define do
@@ -7,7 +9,6 @@ FactoryBot.define do
     password { Faker::Internet.password }
     name { Faker::Name.name }
     username { Faker::Internet.username }
-
   end
 
   factory :post do
